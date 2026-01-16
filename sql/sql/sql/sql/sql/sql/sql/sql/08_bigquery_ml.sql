@@ -1,7 +1,10 @@
 -- 08_bigquery_ml.sql
 -- Purpose: Quantify channel impact on sales using BigQuery ML (linear regression)
+-- Note: Run each section separately in BigQuery.
 
--- 1) Train a linear regression model
+-- -------------------------------------------------------------------
+-- A) Train the model
+-- -------------------------------------------------------------------
 CREATE OR REPLACE MODEL `marketing-spend-roi-analysis.marketing_roi.sales_regression_model`
 OPTIONS (
   model_type = 'linear_reg',
@@ -14,14 +17,20 @@ SELECT
   Sales
 FROM `marketing-spend-roi-analysis.marketing_roi.marketing_spend`;
 
--- 2) Inspect coefficients (marginal impact by channel)
+-- -------------------------------------------------------------------
+-- B) Inspect coefficients (marginal impact by channel)
+-- -------------------------------------------------------------------
+-- Run after training the model
 SELECT
   processed_input AS feature,
   weight AS coefficient
 FROM ML.WEIGHTS(MODEL `marketing-spend-roi-analysis.marketing_roi.sales_regression_model`)
 ORDER BY ABS(weight) DESC;
 
--- 3) Evaluate model quality (R2, RMSE)
+-- -------------------------------------------------------------------
+-- C) Evaluate model quality (R2, RMSE)
+-- -------------------------------------------------------------------
+-- Run after training the model
 SELECT
   *
 FROM ML.EVALUATE(MODEL `marketing-spend-roi-analysis.marketing_roi.sales_regression_model`);
