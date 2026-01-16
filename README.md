@@ -41,6 +41,7 @@ This project demonstrates end-to-end analytical thinking:
 - Marketing efficiency declines as total spend increases, indicating diminishing returns.
 - Lower-spend campaigns generate higher average ROAS.
 - Regression results show stronger marginal impact from Radio compared to TV, with Newspaper contributing minimal incremental sales.
+- Spend decile analysis shows ROAS declining from low-spend to high-spend groups, consistent with diminishing returns.
 
 ---
 
